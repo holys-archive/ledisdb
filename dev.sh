@@ -14,6 +14,7 @@ SNAPPY_DIR=/usr/local/snappy
 LEVELDB_DIR=/usr/local/leveldb
 ROCKSDB_DIR=/usr/local/rocksdb
 HYPERLEVELDB_DIR=/usr/local/hyperleveldb
+TOKUDB_DIR=/usr/local/tokuft
 
 function add_path()
 {
@@ -73,6 +74,16 @@ if [ -f $HYPERLEVELDB_DIR/include/hyperleveldb/c.h ]; then
     DYLD_LIBRARY_PATH=$(add_path $DYLD_LIBRARY_PATH $HYPERLEVELDB_DIR/lib)
     GO_BUILD_TAGS="$GO_BUILD_TAGS hyperleveldb"
 fi
+
+
+if [ -f $TOKUDB_DIR/include/tokudb.h ];then
+    CGO_CFLAGS="$CGO_CFLAGS -I$TOKUDB_DIR/include"
+    CGO_CXXFLAGS="$CGO_CXXFLAGS -I$TOKUDB_DIR/include"
+    CGO_LDFLAGS="$CGO_LDFLAGS -L$TOKUDB_DIR/lib -ltokufractaltree -ltokuportability"
+    LD_LIBRARY_PATH=$(add_path $LD_LIBRARY_PATH $TOKUDB_DIR/lib)
+    DYLD_LIBRARY_PATH=$(add_path $DYLD_LIBRARY_PATH $TOKUDB_DIR/lib)
+    GO_BUILD_TAGS="$GO_BUILD_TAGS tokudb"
+fi 
 
 export CGO_CFLAGS
 export CGO_CXXFLAGS
