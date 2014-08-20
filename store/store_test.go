@@ -24,7 +24,6 @@ func TestStore(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-
 		testStore(db, t)
 		testClear(db, t)
 		testTx(db, t)
@@ -44,6 +43,7 @@ func testClear(db *DB, t *testing.T) {
 	for ; it.Valid(); it.Next() {
 		db.Delete(it.RawKey())
 	}
+	it.Close()
 }
 
 func testSimple(db *DB, t *testing.T) {

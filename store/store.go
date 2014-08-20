@@ -13,6 +13,7 @@ import (
 	"github.com/siddontang/ledisdb/store/leveldb"
 	"github.com/siddontang/ledisdb/store/mdb"
 	"github.com/siddontang/ledisdb/store/rocksdb"
+	"github.com/siddontang/ledisdb/store/tokuft"
 )
 
 func getStorePath(cfg *config.Config) string {
@@ -59,4 +60,5 @@ func init() {
 	_ = leveldb.DBName
 	_ = mdb.DBName
 	_ = rocksdb.DBName
+	_ = tokuft.DBName
 }

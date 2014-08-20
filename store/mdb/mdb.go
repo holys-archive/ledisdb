@@ -86,7 +86,7 @@ func (s Store) Open(path string, c *config.Config) (driver.IDB, error) {
 }
 
 func (s Store) Repair(path string, c *config.Config) error {
-	println("llmd not supports repair")
+	println("lmdb not supports repair")
 	return nil
 }
 
